@@ -1,23 +1,23 @@
 const express = require('express');
-
-const bodyParser = require('body-parser')
-
-const cors =require('cors');
-
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express();
 
-require('./Config/db')
+// Import your database configuration and routes
+require('./Config/db');
+const router = require('./Routes/router');
 
-const router = require('./Routes/router')
+// Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
 
-app.use(bodyParser.urlencoded({ extended: false }))
+// Use your router for handling routes
+app.use(router);
 
-app.use(cors())
-app.use(bodyParser.json())
-app.use(router)
+// Define a port variable to make it easier to change the port in the future
+const PORT = process.env.PORT || 8080;
 
-// The express. static() function is a built-in middleware function in Express. It serves static files and is based on serve-static. Syntax: express.static(root, [options]) Parameters: The root parameter describes the root directory from which to serve static assets
-
-app.listen(8080, () => {
-    console.log("server started")
-})
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});

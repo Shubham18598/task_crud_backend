@@ -1,19 +1,21 @@
 const mongoose = require('mongoose');
 
-const task_schema = new mongoose.Schema({
-    title:{
-        type:String,
-        required:true
+// Define the schema
+const taskSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true
     },
-    desc:{
-        type:String,
-        required:true
+    desc: {
+        type: String,
+        required: true
     },
-    price:{
-        type:Number,
-        required:true
+    price: {
+        type: Number,
+        required: true
     }
-})
+});
 
-const task = new mongoose.model('task', task_schema)
-module.exports=task
+// Create and export the model
+const Task = mongoose.model('Task', taskSchema);
+module.exports = Task;
